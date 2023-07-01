@@ -9,6 +9,13 @@ class Api::V1::Referrals::ReferralsController < ApplicationController
                 referrals: referrals
             }
         }, status: :ok
+    rescue StandardError => e
+        render json: {
+            data: {
+                message: "Something went wrong.",
+                errors: [e.message]
+            }
+        }, status: :internal_server_error
     end
 
     def create
@@ -20,7 +27,20 @@ class Api::V1::Referrals::ReferralsController < ApplicationController
                 referral: referral
             }
         }, status: :created
-
+    rescue ActiveRecord::RecordNotUnique => e
+        render json: {
+            data: {
+                message: "You have already referred this email id.",
+                errors: [e.message]
+            }
+        }, status: :unprocessable_entity
+    rescue StandardError => e
+        render json: {
+            data: {
+                message: "Something went wrong.",
+                errors: [e.message]
+            }
+        }, status: :internal_server_error
     end
 
     private
