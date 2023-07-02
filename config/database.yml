@@ -10,8 +10,8 @@ default: &default
   timeout: 5000
   encoding: utf8
   database: referral
-  username: root
-  password: jeet@mysql
+  username: <%= ENV['MYSQL_USERNAME'] { root } %>
+  password: <%= ENV['MYSQL_PASSWORD'] { 'mysql@1234' }%>
   host: 127.0.0.1
   port: 3306
 
