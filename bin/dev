@@ -14,8 +14,7 @@ FileUtils.chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
   puts "== Starting webpacker compile =="
-  system!("export NODE_OPTIONS=--openssl-legacy-provider")
-  system! "bin/rails webpacker:compile"
+  system!("export NODE_OPTIONS=--openssl-legacy-provider && bin/rails webpacker:compile")
 
   puts "\n== Starting application server on port 3000 =="
   system! "bin/rails server -p 3000"

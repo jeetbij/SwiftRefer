@@ -25,8 +25,11 @@ FileUtils.chdir APP_ROOT do
   system!("bundle config set --local path 'vendor'")
   system("bundle check") || system!("bundle install --path=vendor")
 
+  puts "\n== Installing yarn =="
+  system!("npm install --global yarn")
+
   puts "\n== Installing react dependencies =="
-  system!("npm install")
+  system!("yarn install")
 
   puts "\n== Setting up DB =="
   puts "\n== Dropping the existing DB =="
