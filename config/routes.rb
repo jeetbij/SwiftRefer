@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "root#index"
+  
   devise_for :users, :controllers => { 
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions' 
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '*path', to: 'root#index', format: false
 
   # devise_for :users, :controllers => { 
   #       registrations: 'registrations',

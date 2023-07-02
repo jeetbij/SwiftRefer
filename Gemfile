@@ -50,3 +50,4 @@ end
 
 gem 'devise-jwt'
 gem 'mysql2'
+gem 'webpacker'
