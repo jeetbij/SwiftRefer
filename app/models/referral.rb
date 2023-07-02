@@ -15,8 +15,7 @@ class Referral < ApplicationRecord
     end
 
     def send_referral_mail
-        sleep(2)
-        # ApplicationMailer.referral_mail(email).deliver_now
+        ApplicationMailer.referral_mail(email).deliver_now
     end
 
     def as_json(additional_options = {})
