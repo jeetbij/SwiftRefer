@@ -17,7 +17,10 @@ FileUtils.chdir APP_ROOT do
   system!("rm -rf vendor")
   system!("rm -rf node_modules")
 
-  puts "== Installing rails dependencies =="
+  puts "\n== Please make sure you have ruby version ~3.x and node installed in your system =="
+  system!("sleep 5")
+
+  puts "\n== Installing rails dependencies =="
   system! "gem install bundler --conservative"
   system!("bundle config set --local path 'vendor'")
   system("bundle check") || system!("bundle install --path=vendor")

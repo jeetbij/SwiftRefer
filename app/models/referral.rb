@@ -1,4 +1,7 @@
 class Referral < ApplicationRecord
+
+    validates :email, :presence => true
+
     belongs_to :user
 
     after_create_commit :send_referral_mail

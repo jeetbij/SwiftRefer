@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :referrals, dependent: :destroy
 
+  validates :password, :presence => true
+  validates :email, :presence => true
+
   def jwt_payload
     super.merge('email' => email)
   end
