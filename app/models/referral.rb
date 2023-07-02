@@ -16,6 +16,8 @@ class Referral < ApplicationRecord
 
     def send_referral_mail
         ApplicationMailer.referral_mail(email).deliver_now
+    rescue StandardError => e
+        Rails.logger.error "[REFERRAL]: Failed to send referral email to the user - #{email}"
     end
 
     def as_json(additional_options = {})
