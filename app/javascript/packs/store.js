@@ -17,7 +17,11 @@ export const setUserData = (userData) => {
 }
 
 export const getUserData = () => {
-    return JSON.parse(localStorage.getItem(USER_DATA))
+    try {
+        return JSON.parse(localStorage.getItem(USER_DATA));
+    } catch (error) {
+        return {}
+    }
 }
 
 export const removeUserData = () => {

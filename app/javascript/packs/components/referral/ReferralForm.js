@@ -9,10 +9,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ErrorBlock from '../ErrorBlock';
 
 import { BASE_URL, ENDPOINTS, COMMON_HEADERS } from '../../constants';
-import { getTokenData, validateEmail } from '../../store';
+import { getTokenData, validateEmail, clearStorage } from '../../store';
+import { useNavigate } from "react-router-dom";
 
 
 export default function ReferralForm(props) {
+    const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState({
         email: '',
@@ -57,6 +60,10 @@ export default function ReferralForm(props) {
               return response.json();
             } else if (response.status === 422) {
               throw new Error("You have already referred the email id.");
+            } else if (response.status === 401) {
+              // Clear the user session/data incase of 401 error
+              clearStorage();
+              navigate("/");
             } else {
               // Handle other error scenarios
               throw new Error("Something went wrong.");

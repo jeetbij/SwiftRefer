@@ -6,10 +6,11 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
 import { BASE_URL, ENDPOINTS, COMMON_HEADERS } from '../constants';
-import { getTokenData } from '../store';
+import { getTokenData, clearStorage } from '../store';
 import Header from "./Header";
 import ReferralForm from './referral/ReferralForm';
 import Referrals from './referral/Referrals';
+import { useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function HomePage() {
-
+  const navigate = useNavigate();
   const [referralData, setReferralData] = useState([]);
 
   useEffect(() => {
@@ -39,6 +40,10 @@ export default function HomePage() {
         if (response.ok) {
           // If response is 200 ok, return the data
           return response.json();
+        } else if (response.status === 401) {
+          // Clear the user session/data incase of 401 error
+          clearStorage();
+          navigate("/");
         } else {
           // Handle other error scenarios
           throw new Error("Something went wrong.");
