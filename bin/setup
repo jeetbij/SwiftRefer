@@ -26,7 +26,7 @@ FileUtils.chdir APP_ROOT do
   system("bundle check") || system!("bundle install --path=vendor")
 
   puts "\n== Installing react dependencies =="
-  system!("yarn install")
+  system!("npm install")
 
   puts "\n== Setting up DB =="
   puts "\n== Dropping the existing DB =="
